@@ -1,0 +1,18 @@
+sq.correl <- function(y, x) {
+  ## y is the dependent variable
+  ## x is the independent variable
+  n <- dim(y)[1]  ## sample size
+  d <- dim(y)[2]  ## dimensions
+  y <- Rfast::standardise(y, center = TRUE, scale = FALSE)  ## centering of Y
+  YY <- crossprod(y)
+  X <- cbind(1, x)
+  U <- Rfast::lmfit(X, y)$residuals
+  if ( !is.matrix(U) )  U <- matrix(U)
+  UU <- crossprod(U)
+  D <- solve(YY, UU)
+  r2T <- mean( 1 - diag( D ) )
+  r2D <- det( diag(d) - D )
+  result <- c(r2T, r2D)
+  names(result) <- c("Trace R-squared", "Determinant R-squared")
+  result
+}

@@ -1,0 +1,12 @@
+Package: corrfuns
+Title: Correlation Coefficient Related Functions
+Version: 1.0
+Date: 2023-10-26
+Authors@R: person("Michail", "Tsagris", role = c("aut", "cre"), email = "mtsagris@uoc.gr")
+Author: Michail Tsagris [aut, cre]
+Maintainer: Michail Tsagris <mtsagris@uoc.gr>
+Depends: R (>= 4.0)
+Imports: graphics, Rfast, stats
+Description: Many correlation coefficient related functions, such as partial correlations and hypothesis testing.
+License: GPL (>= 2)
+

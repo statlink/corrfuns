@@ -1,0 +1,10 @@
+#useDynLib(pchc, .registration = TRUE)
+
+importFrom("Rfast2", Sample.int)
+importFrom("stats", prcomp, qnorm, quantile, sd)
+importFrom("graphics", abline, hist, legend)
+
+exportPattern("^[[:alpha:]]+")
+exportPattern("^[^\\.]")
+
+export(choose.pc)

@@ -1,0 +1,21 @@
+permcor2 <- function(x, B = 999) {
+  ## x is a 2 column matrix containing the data
+  ## R is the number of permutations
+  n <- dim(x)[1]
+  r <- cor(x)[2]
+  test <- 0.5 * log( (1 + r)/(1 - r) )  ## test statistic
+  z1 <- x[, 1]
+  x1 <- replicate( B, sample(z1, n) )
+  x2 <- x[, 2]
+  m1 <- sum(z1) / n       ;   m12 <- sum(z1^2)
+  yb1 <- numeric(B) + m1  ;  y1 <- numeric(B) + m12
+  m2 <- sum(x2) / n       ;   m22 <- sum(x2^2)
+  yb2 <- numeric(B) + m2  ;  y2 <- numeric(B) + m22
+  sxy <- Rfast::eachcol.apply(x1,x2)
+  rb <- (sxy - n * yb1 * yb2) / sqrt( (y1 - n * yb1^2) * (y2 - n * yb2^2) )
+  tb <- 0.5 * log( (1 + rb)/(1 - rb) )  ## test statistic
+  pvalue <- ( sum( abs(tb) > abs(test) ) + 1 ) / (B + 1)  ## permutation p-value
+  res <- c(r, pvalue)
+  names(res) <- c('correlation', 'p-value')
+  res
+}

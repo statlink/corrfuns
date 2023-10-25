@@ -1,0 +1,58 @@
+\name{Permutation p-value for the correlation coefficient}
+\alias{permcor}
+\alias{permcor2}
+\alias{permcor3}
+\title{
+Permutation p-value for the correlation coefficient
+}
+
+\description{
+Permutation p-value for the correlation coefficient.
+}
+
+\usage{
+bootcor(x, B = 999)
+bootcor2(x, B = 999)
+}
+
+\arguments{
+\item{x}{
+A numerical matrix with two columns.
+}
+\item{B}{
+The number of bootstrap samples to generate.
+}
+}
+
+\details{
+Given a correlation matrix the function will caclulate the partial correlation between variables indx and indy conditioning on variable(s) indz. The logarithm of the p-value is also returned.
+}
+
+\value{
+The partial correlation coefficient and the logged p-value for the test of no association.
+}
+
+%\references{
+%
+%}
+
+\author{
+Michail Tsagris
+
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+}
+
+%\note{
+%%  ~~further notes~~
+%}
+
+\seealso{
+\code{ \link{bootcor}
+}
+}
+
+\examples{
+permcor( iris[, 1:2] )
+}
+
+

@@ -1,0 +1,52 @@
+eigci <- function(x, k, a = 0.05, B = 1000, graph = TRUE) {
+  ## x contains the data
+  ## k is the number of principal components to keep
+  ## a denotes the lower quantile of the standard normal distribution
+  ## thus 0.95 confidence intervals are constructed
+  ## R is the number of bootstrap replicates
+  n <- dim(x)[1]
+  p <- dim(x)[2]
+  lam <- prcomp(x)$sd^2  ## eigenvalues of the covariance matrix
+  psi <- sum(lam[1:k]) / sum(lam)  ## the percentage retained by the
+  ## first k components
+  if (B == 1) {
+    trasu <- sum(lam)
+    trasu2 <- sum(lam^2)
+    alpha <- sum( (lam^2)[1:k] ) / trasu2
+    t2 <- ( 2 * trasu2 * (psi^2 - 2 * alpha * psi + alpha) )/
+      ( (n - 1) * (trasu^2) )
+    ci <- c(psi - qnorm(1 - a/2) * sqrt(t2), psi +
+              qnorm(1 - a/2) * sqrt(t2))
+    result <- c(psi, ci = ci)
+    names(result) <- c( 'psi', paste(c( a/2 * 100, (1 - a/2) * 100 ),
+                                     "%", sep = "") )
+  }
+  if (B > 1) {
+    ## bootstrap version
+    tb <- numeric(B)
+    for (i in 1:B) {
+      b <- Rfast2::Sample.int(1:n, n, replace = TRUE)
+      lam <- prcomp(x[b, ])$sd^2
+      tb[i] <- sum( lam[1:k] ) / sum(lam)
+    }
+    conf1 <- c( psi - qnorm(1 - a/2) * sd(tb), psi + qnorm(1 - a/2) * sd(tb) )
+    conf2 <- quantile( tb, probs = c(a/2, 1 - a/2) )
+
+    if ( graph ) {
+      hist(tb, xlab = "Bootstrap percentages", main = "")
+      abline(v = psi, lty = 2, lwd = 2)
+      abline(v = mean(tb), lty = 1, lwd = 3)
+      legend( conf2[1], B/10, cex = 0.8, c("psi", "bootstrap psi"),
+              lty = c(2, 1), lwd = c(2, 3) )
+    }
+
+    ci <- rbind(conf1, conf2)
+    colnames(ci) <- paste(c( a/2 * 100, (1 - a/2) * 100 ), "%", sep ="")
+    rownames(ci) <- c("standard", "empirical")
+    res <- c(psi, mean(tb), mean(tb) - psi )
+    names(res) <- c('psi', 'psi.boot', 'est.bias')
+    result <- list(res = res, ci = ci)
+
+  }
+  result
+}

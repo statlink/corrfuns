@@ -1,0 +1,57 @@
+\name{Permutation p-value for many correlation coefficients}
+\alias{permcorrels}
+\title{
+Permutation p-value for many correlation coefficients
+}
+
+\description{
+Permutation p-value for many correlation coefficients.
+}
+
+\usage{
+permcorrels(y, x, B = 999)
+}
+
+\arguments{
+\item{x}{
+A numerical matrix with two columns.
+}
+\item{B}{
+The number of bootstrap samples to generate.
+}
+}
+
+\details{
+Given a correlation matrix the function will caclulate the partial correlation between variables indx and indy conditioning on variable(s) indz. The logarithm of the p-value is also returned.
+}
+
+\value{
+The partial correlation coefficient and the logged p-value for the test of no association.
+}
+
+%\references{
+%
+%}
+
+\author{
+Michail Tsagris
+
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+}
+
+%\note{
+%%  ~~further notes~~
+%}
+
+\seealso{
+\code{ \link{permcor}
+}
+}
+
+\examples{
+y <- rnorm(40)
+x <- matrix(rnorm(40 * 1000), ncol = 1000)
+a <- permcorrels(y, x )
+}
+
+

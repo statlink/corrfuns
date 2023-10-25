@@ -1,0 +1,10 @@
+#useDynLib(pchc, .registration = TRUE)
+
+importFrom("graphics", abline)
+
+
+exportPattern("^[[:alpha:]]+")
+exportPattern("^[^\\.]")
+
+export(choose.pc)
+export(.onAttach)

@@ -1,0 +1,14 @@
+Package: choose.pc
+Type: Package
+Title: Choose the Number of Principal Components via Recistruction Error
+Version: 1.0
+URL:
+Date: 2023-10-23
+Authors@R: person("Michail", "Tsagris", role = c("aut", "cre"), email = "mtsagris@uoc.gr")
+Author: Michail Tsagris [aut, cre]
+Maintainer: Michail Tsagris <mtsagris@uoc.gr>
+Depends: R (>= 4.0)
+Suggests: MASS
+Description: One way to choose the number of principal components is via the reconstruction error. This package is designed mainly for this purpose. Graphical representation is also supported, plus some other principal component analysis related functions. References include: Jolliffe I.T. (2002). Principal Component Analysis. <doi:10.1007/b98835>.
+License: GPL (>= 2)
+

@@ -1,0 +1,31 @@
+bootcor2 <- function(x, R = 999) {
+  ## x is a 2 column matrix containing the data
+  ## B is the number of bootstrap replications
+
+  s <- cov(x)
+  n <- dim(x)[1]
+  eig <- eigen(s, symmetric = TRUE)
+  lam <- eig$values
+  vec <- eig$vectors
+  A <- vec %*% ( t(vec) / sqrt(lam) )
+  z <- x %*% A  ## This makes the correlation matrix
+  ## equal to the identity matrix, thus rho = 0
+
+  rb <- numeric(R)
+  r <- cor(x)[2]
+  stat <- 0.5 * log( (1 + r)/(1 - r) )  ## the test statistic
+  for (i in 1:R) {
+    nu <- sample(1:n, replace = TRUE)
+    rb[i] <- cor( z[nu, ] )[2]
+  }
+
+  tb <- 0.5 * log( (1 + rb)/(1 - rb) )
+  pvalue <- ( sum( abs(tb) >  abs(stat) ) + 1)/(B + 1)  ## bootstrap p-value
+  hist(tb, xlab = "Bootstrapped test statistic", main = " ")
+  abline(v = test, lty = 2, lwd = 2)
+  ## The dotted vertical line is the test statistic value
+  result <- c(r, pvalue)
+  names(result) <- c('correlation', 'p-value')
+  result
+
+}

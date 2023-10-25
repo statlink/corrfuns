@@ -1,0 +1,50 @@
+partial.corr <- function(y, x, z, type = "pearson", rho = 0, a = 0.05, plot = FALSE) {
+  ## y and x are the two variables whose correlation is of interest
+  ## z is a set of variable(s), one or more variables
+  ## It accepts two types only, either "pearson" or "spearman"
+  ## over which the condition takes place
+  ## rho is the hypothesised correlation
+  ## a is the significance level, set to 0.05 by default
+  n <- length(y)  ## sample size
+  d <- dim(z)[2]  ## dimensionality of z
+  res <- resid( lm( cbind(y, x) ~ z ) )  ## residuals of y and x on z
+  r <- cor(res, method = type)[1, 2]  ## partial correlation of y and x conditioning on z
+  zh0 <- 0.5 * log( (1 + rho) / (1 - rho) )  ## Fisher's transform for Ho
+  zh1 <- 0.5 * log( (1 + r) / (1 - r) )  ## Fisher's transform for H1
+  if (type == "pearson") {
+    se <- 1/sqrt(n - d - 3)  ## standard error for Fisher's transform under Ho
+  } else if ( type == "spearman" ){
+    se <-  1.029563 / sqrt(n - d - 3)  ## standard error for Fisher's transform under Ho
+  }
+  test <- (zh1 - zh0)/se  ## test statistic
+  pvalue <- 2 * ( 1 - pt( abs(test), n - d - 3 ) )  ## p-value
+  zL <- zh1 - qt(1 - a/2, n - d - 3) * se
+  zH <- zh1 + qt(1 - a/2, n - d - 3) * se
+  fishL <- (exp(2 * zL) - 1)/(exp(2 * zL) + 1)  ## lower confidence limit
+  fishH <- (exp(2 * zH) - 1)/(exp(2 * zH) + 1)  ## upper confidence limit
+  ci <- c(fishL, fishH)
+  names(ci) <- paste( c( a/2 * 100, (1 - a/2) * 100 ), "%", sep = "" )
+  r0 <- seq( max(-0.99, r - 0.2), min(0.99, r + 0.2), by = 0.001 )
+  z0 <- 0.5 * log( (1 + r0)/(1 - r0) )  ## Fisher's transformation
+  ## for many Hos
+  stat <- abs(zh1 - z0)/se  ## test statistics
+  pval <- 2 * ( 1 - pt( abs(stat), n - d - 3 ) )  ## p-values
+
+  if ( plot ) {
+    par(mfrow = c(1, 2))
+    plot(r0, stat, type = "l", lwd = 2, xlab = "Correlation values",
+         ylab = "Test statistic")
+    abline( h = qt(0.975, n - d - 3), col = 2 )
+    abline( v = min( r0[stat < qt(0.975, n - d - 3)] ), col = 3, lty = 3, lwd = 2 )
+    abline( v = max( r0[stat < qt(0.975, n - d - 3)] ), col = 3, lty = 3, lwd = 2 )
+    plot(r0, pval, type = "l", lwd = 2, xlab = "Correlation values",
+         ylab = "P-values")
+    abline(h = a, col = 2)
+    abline( v = min( r0[pval > a] ), col = 3, lty = 3, lwd = 2 )
+    abline( v = max( r0[pval > a] ), col = 3, lty = 3, lwd = 2 )
+  }
+
+  result <- c(r, pvalue)
+  names(result) <- c('correlation', 'p-value')
+  list(result = result, ci = ci)
+}

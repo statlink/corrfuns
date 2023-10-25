@@ -1,0 +1,100 @@
+\name{Choose the number of principal components via reconstruction error}
+\alias{pc.choose}
+\title{
+Choose the number of principal components via reconstruction error
+}
+
+\description{
+Choose the number of principal components via reconstruction error.
+}
+
+\usage{
+pc.choose(x, graph = TRUE)
+}
+
+\arguments{
+\item{x}{
+A numerical matrix with more rows than columns.
+}
+\item{graph}{
+Should the plot of the PRESS values appear? Default value is TRUE.
+}
+}
+
+\details{
+SVD stands for Singular Value Decomposition of a rectangular matrix. That is any matrix, not only a square one in contrast to the Spectral Decomposition with eigenvalues and eigenvectors, produced by principal component analysis (PCA). Suppose we have a \eqn{n \times p} matrix \eqn{\bf X}. Then using SVD we can write the matrix as \deqn{
+{\bf X}={\bf UDV}^{T},
+}
+where \eqn{\bf U} is an orthonormal matrix containing the eigenvectors of \eqn{{\bf XX}^T}, the \eqn{\bf V} is an orthonormal matrix containing the eigenvectors of \eqn{{\bf X}^T{\bf X}} and \eqn{D} is a \eqn{p \times p} diagonal matrix containing the \eqn{r} non zero singular values \eqn{d_1,\ldots,d_r} (square root of the eigenvalues) of \eqn{{\bf XX}^T} (or \eqn{{\bf X}^T{\bf X}}) and the remaining \eqn{p-r} elements of the diagonal are zero. We remind that the maximum rank of an \eqn{n \times p} matrix is equal to \eqn{\min\{n,p\}}. Using the SVD decomposition equaiton above, each column of \eqn{\bf X} can be written as
+\deqn{
+{\bf x}_j=\sum_{k=1}^r{\bf u}_kd_k{\bf v}_{jk}.
+}
+
+This means that we can reconstruct the matrix \eqn{\bf X} using less columns (if \eqn{n>p}) than it has.
+\deqn{
+\tilde{{\bf x}}^{m}_j=\sum_{k=1}^m{\bf u}_kd_k{\bf v}_{jk},
+}
+where \eqn{m<r}.
+
+The reconstructed matrix will have some discrepancy of course, but it is the level of discrepancy we are interested in. If we center the matrix \eqn{\bf X}, subtract the column means from every column, and perform the SVD again, we will see that the orthonormal matrix \eqn{\bf V} contains the eigenvectors of the covariance matrix of the original, the un-centred, matrix \eqn{\bf X}.
+
+Coming back to the a matrix of \eqn{n} observations and \eqn{p} variables, the question was how many principal components to retain. We will give an answer to this using SVD to reconstruct the matrix. We describe the steps of this algorithm below.
+1. Center the matrix by subtracting from each variable its mean \eqn{{\bf Y}={\bf X}-{\bf m}}
+
+2. Perform SVD on the centred matrix \eqn{\bf Y}.
+
+3. Choose a number from \eqn{1} to \eqn{r} (the rank of the matrix) and reconstruct the matrix. Let us denote by \eqn{\widetilde{{\bf Y}}^{m}} the reconstructed matrix.
+
+4. Calculate the sum of squared differences between the reconstructed and the original values
+\deqn{
+PRESS\left(m\right)=\sum_{i=1}^n\sum_{j=1}^p\left(\tilde{y}^{m}_{ij}-y_{ij}\right)^2, m=1,..,r.
+}
+
+5. Plot \eqn{PRESS\left(m\right)} for all the values of \eqn{m} and choose graphically the number of principal components.
+
+The graphical way of choosing the number of principal components is not the best and there alternative ways of making a decision (see for example Jolliffe (2002)).
+}
+
+\value{
+A list including:
+\item{values}{
+The eigenvalues of the covariance matrix.
+}
+\item{cumprop}{
+The cumulative proportion of the eigenvalues of the covariance matrix.
+}
+\item{per}{
+The differences in the cumulative proportion of the eigenvalues of the covariance matrix.
+}
+\item{press}{
+The reconstruction error \eqn{\sqrt{\sum_{ij}{(x_{ij}-\hat{x}_{ij})^2}}} for each number of eigenvectors.
+}
+\item{runtime}{
+The runtime of the algorithm.
+}
+}
+
+\references{
+Jolliffe I.T. (2002). Principal Component Analysis.
+}
+
+\author{
+Michail Tsagris.
+
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+}
+
+%\note{
+%%  ~~further notes~~
+%}
+
+\seealso{
+\code{\link{eigci}
+}
+}
+
+\examples{
+x <- as.matrix(iris[, 1:4])
+a <- pc.choose(x, graph = FALSE)
+}
+

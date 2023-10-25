@@ -1,0 +1,25 @@
+perm.correls2 <- function(y, x, R = 999) {
+  ## x is a 2 column matrix containing the data
+  ## type can be either "pearson" or "spearman"
+  ## R is the number of permutations
+  p <- dim(x)[2]
+  n <- length(y)
+  r <- as.vector( cor(y, x) )
+  test <- log( (1 + r) / (1 - r) )  ## the test statistic
+  m1 <- sum(y)         ;     m12 <- sum(y^2)
+  m2 <- Rfast::colsums(x)     ;     m22 <- Rfast::colsums(x^2)
+  up <-  m1 * m2 / n
+  down <- sqrt( (m12 - m1^2 / n) * (m22 - m2^2 / n) )
+  y1 <- Rfast::rep_col(y, R)
+  y1 <- Rfast::colShuffle(y1)
+  sxy <- Rfast::colsums(y1 * x)
+  rb <- (sxy - up) / down
+  tb <- log( (1 + rb)/(1 - rb) )  ## the test statistic
+  pvalue <- ( Rfast::rowsums( abs(tb) > abs(test) ) + 1 ) / (R + 1)  ## bootstrap p-value
+  res <- cbind( r, pvalue )
+  colnames(res) <- c('correlation', 'p-value')
+  if ( is.null(colnames(x)) ) {
+    rownames(res) <- paste("X", 1:dim(x)[2], sep = "")
+  } else  rownames(res) <- colnames(x)
+  res
+}
