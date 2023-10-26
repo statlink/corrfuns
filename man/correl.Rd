@@ -34,7 +34,7 @@ The significance level.
 Fisher's transformation for the correlation coefficient is defined as
 \eqn{\hat{z}=\frac{1}{2}\log\frac{1+r}{1-r}} and its inverse is equal to \eqn{
 \frac{\exp\left(2\hat{z}\right)-1}{\exp\left(2\hat{z}\right)+1}}.
-The estimated standard error of Fisher's transform is \eqn{\frac{1}{\sqrt{n-3}}} (Efron and Tibshirani, 1993, pg. 54). If on the other hand, you choose  to calculate Spearman's correlation coefficients, the estimated standard error is slightly different \eqn{\simeq \frac{ 1.029563}{\sqrt{n-3}}} (Fieller, Hartley and Pearson, 1957, Fieller and Pearson, 1961}. R calculates confidence intervals based in a different way and does hypothesis testing for zero values only. The function calculates asymptotic confidence intervals based upon Fisher's transform, assuming asymptotic normality of the transform and performs hypothesis testing for the true (any, non only zero) value of the correlation. The sample distribution though is a \eqn{t_{n-3}}.
+The estimated standard error of Fisher's transform is \eqn{\frac{1}{\sqrt{n-3}}} (Efron and Tibshirani, 1993, pg. 54). If on the other hand, you choose  to calculate Spearman's correlation coefficients, the estimated standard error is slightly different \eqn{\simeq \frac{ 1.029563}{\sqrt{n-3}}} (Fieller, Hartley and Pearson, 1957, Fieller and Pearson, 1961). R calculates confidence intervals based in a different way and does hypothesis testing for zero values only. The function calculates asymptotic confidence intervals based upon Fisher's transform, assuming asymptotic normality of the transform and performs hypothesis testing for the true (any, non only zero) value of the correlation. The sample distribution though is a \eqn{t_{n-3}}.
 }
 
 \value{
@@ -42,6 +42,8 @@ The partial correlation coefficient and the logged p-value for the test of no as
 }
 
 \references{
+Efron B. and Tibshirani R.J. (1993). An introduction to the bootstrap. Chapman & Hall/CRC.
+
 Fieller E.C., Hartley H.O. and Pearson E.S. (1957). Tests for rank correlation coefficients.
 I. Biometrika, 44(3/4): 470--481.
 
