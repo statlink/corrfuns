@@ -26,7 +26,7 @@ Given a correlation matrix the function will caclulate the partial correlation b
 }
 
 \value{
-The partial correlation coefficient and the logged p-value for the test of no association.
+The partial correlation coefficient and the p-value for the test of no association.
 }
 
 %\references{

@@ -31,11 +31,7 @@ The type of correlation coefficients, "pearson" or "spearman".
 }
 
 \details{
-The test statistic for the hypothesis of equality of two correlation coefficients is the following:
-\deqn{
-Z=\frac{\hat{z}_1-\hat{z}_2}{\sqrt{1/\left(n1-3\right)+1/\left(n2-3\right)}},
-}
-where \eqn{\hat{z}_1} and \eqn{\hat{z}_2} denote the Fisher's transformation (see \code{\link{correl}} applied to the two correlation coefficients and \eqn{n_1} and \eqn{n_2} denote the  sample sizes of the two correlation coefficients. The denominator is the sum of the variances of the two coefficients and as you can see we used a different variance estimator than the one we used before. This function performs hypothesis testing for the equality of two correlation coefficients. The result is the calculated p-value from the standard normal distribution.
+Given a correlation matrix the function will caclulate the partial correlation between variables indx and indy conditioning on variable(s) indz. The logarithm of the p-value is also returned.
 }
 
 \value{

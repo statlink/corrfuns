@@ -38,7 +38,7 @@ The estimated standard error of Fisher's transform is \eqn{\frac{1}{\sqrt{n-3}}}
 }
 
 \value{
-The partial correlation coefficient and the p-value for the test of no association.
+The partial correlation coefficient and the logged p-value for the test of no association.
 }
 
 \references{

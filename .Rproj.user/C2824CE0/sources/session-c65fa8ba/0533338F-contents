@@ -59,7 +59,7 @@ But, I noticed one thing, the same thing Neto (2015) mentions. For big sample si
 }
 
 \value{
-The partial correlation coefficient and the p-value for the test of no association.
+The partial correlation coefficient and the logged p-value for the test of no association.
 }
 
 \references{
