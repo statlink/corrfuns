@@ -1,0 +1,77 @@
+\name{Asymptotic p-value for a correlation coefficient}
+\alias{correl}
+\title{
+Asymptotic p-value for a correlation coefficient
+}
+
+\description{
+Asymptotic p-value a correlation coefficient.
+}
+
+\usage{
+correl(y, x, type = "pearson", rho = 0, alpha = 0.05)
+}
+
+\arguments{
+\item{y}{
+A numerical vector.
+}
+\item{x}{
+A numerical vector.
+}
+\item{type}{
+The type of correlation coefficient to compute, "pearson" or "spearman".
+}
+\item{rho}{
+The hypothesized value of the true partial correlation.
+}
+\item{alpha}{
+The significance level.
+}
+}
+
+\details{
+Fisher's transformation for the correlation coefficient is defined as
+\eqn{\hat{z}=\frac{1}{2}\log\frac{1+r}{1-r}} and its inverse is equal to \eqn{
+\frac{\exp\left(2\hat{z}\right)-1}{\exp\left(2\hat{z}\right)+1}}.
+The estimated standard error of Fisher's transform is \eqn{\frac{1}{\sqrt{n-3}}} (Efron and Tibshirani, 1993, pg. 54). If on the other hand, you choose  to calculate Spearman's correlation coefficients, the estimated standard error is slightly different \eqn{\simeq \frac{ 1.029563}{\sqrt{n-3}}} (Fieller, Hartley and Pearson, 1957, Fieller and Pearson, 1961). R calculates confidence intervals based in a different way and does hypothesis testing for zero values only. The function calculates asymptotic confidence intervals based upon Fisher's transform, assuming asymptotic normality of the transform and performs hypothesis testing for the true (any, non only zero) value of the correlation. The sample distribution though is a \eqn{t_{n-3}}.
+}
+
+\value{
+A list including:
+\item{result}{
+The correlation coefficient and the p-value for the test of zero correlation.
+}
+\item{ci}{The asymptotic \eqn{(1-\alpha)\%} confidence interval for the true correlation coefficient.
+}}
+
+\references{
+Efron B. and Tibshirani R.J. (1993). An introduction to the bootstrap. Chapman & Hall/CRC.
+
+Fieller E.C., Hartley H.O. and Pearson E.S. (1957). Tests for rank correlation coefficients.
+I. Biometrika, 44(3/4): 470--481.
+
+Fieller E.C. and Pearson E.S. (1961). Tests for rank correlation coefficients: II. Biometrika,
+48(1/2): 29--40.
+}
+
+\author{
+Michail Tsagris
+
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+}
+
+%\note{
+%%  ~~further notes~~
+%}
+
+\seealso{
+\code{ \link{correls}, \link{permcorrels}
+}
+}
+
+\examples{
+a <- correl( iris[, 1], iris[, 2] )
+}
+
+

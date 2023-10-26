@@ -1,0 +1,77 @@
+\name{Partial correlation between two variables given a correlation matrix}
+\alias{partialcor}
+\title{
+Partial correlation between two variables when a correlation matrix is given
+}
+
+\description{
+Partial correlation between two variables when a correlation matrix is given.
+}
+
+\usage{
+partialcor(R, indx, indy, indz, n)
+}
+
+\arguments{
+\item{R}{
+A correlation matrix.
+}
+\item{indx}{
+The index of the first variable whose conditional correlation is to estimated.
+}
+\item{indy}{
+The index of the second variable whose conditional correlation is to estimated.
+}
+\item{indz}{
+The index of the conditioning variables.
+}
+\item{n}{
+The sample size of the data from which the correlation matrix was computed.
+}
+}
+
+\details{
+Suppose you want to calculate the correlation coefficient between two variables controlling for the effect of (or conditioning on) one or more other variables. So you cant to calculate \eqn{\hat{\rho}\left(X,Y|{\bf Z}\right)}, where \eqn{\bf Z} is a matrix, since it does not have to be just one variable. Using the correlation matrix \eqn{R} we can do the following:
+\deqn{
+r_{X,Y|{\bf Z}}=
+{
+\begin{array}{cc}
+\frac{R_{X,Y} - R_{X, {\bf Z}} R_{Y,{\bf Z}}}{
+\sqrt{ \left(1 - R_{X,{\bf Z}}^2\right)^T \left(1 - R_{Y,{\bf Z}}^2\right) }} & \text{if} \ \ |{\bf Z}|=1 \\
+-\frac{ {\bf A}_{1,2} }{ \sqrt{{\bf A}_{1,1}{\bf A}_{2,2}} } & \text{if} \ \ |{\bf Z}| > 1
+\end{array}
+}
+}
+
+The \eqn{R_{X,Y}} is the correlation between variables \eqn{X} and \eqn{Y}, \eqn{R_{X,{\bf Z}}} and \eqn{R_{Y,{\bf Z}}} denote the correlations between \eqn{X} & \eqn{\bf Z} and \eqn{Y} & \eqn{\bf Z}, \eqn{{\bf A}={\bf R}_{X,Y,{\bf Z}}^{-1}}, with \eqn{\bf A} denoting the correlation sub-matrix of variables \eqn{X, Y, {\bf Z}} and \eqn{A_{i,j}} denotes the element in the \eqn{i}-th row and \eqn{j}-th column of matrix \eqn{A}. The \eqn{|{\bf Z}|} denotes the cardinality of \eqn{\bf Z}, i.e. the number of variables.
+}
+
+\value{
+The partial correlation coefficient and the p-value for the test of zero partial correlation.
+}
+
+%\references{
+%
+%}
+
+\author{
+Michail Tsagris
+
+R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
+}
+
+%\note{
+%%  ~~further notes~~
+%}
+
+\seealso{
+\code{ \link{partialcor2}, \link{pcormat}
+}
+}
+
+\examples{
+r <- cor(iris[, 1:4])
+partialcor(r, 1, 2, 3:4, 150)
+}
+
+
