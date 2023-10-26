@@ -47,7 +47,7 @@ The \eqn{R_{X,Y}} is the correlation between variables \eqn{X} and \eqn{Y}, \eqn
 }
 
 \value{
-The partial correlation coefficient and the p-value for the test of no association.
+The partial correlation coefficient and the p-value for the test of zero correlation.
 }
 
 %\references{

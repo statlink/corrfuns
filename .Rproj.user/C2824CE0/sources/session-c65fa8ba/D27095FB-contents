@@ -47,12 +47,7 @@ The standard error of the Fisher's transformation of the sample partial correlat
 }
 
 \value{
-A list including:
-\item{result}{
-The partial correlation coefficient and the p-value for the test of zero partial correlation.
-}
-\item{ci}{The asymptotic \eqn{(1-\alpha)\%} confidence interval for the true partial correlation coefficient.
-}
+The partial correlation coefficient and the p-value for the test of no association.
 }
 
 %\references{

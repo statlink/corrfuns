@@ -66,12 +66,14 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{correls}, \link{permcorrels}
+\code{ \link{correl}, \link{permcorrels}
 }
 }
 
 \examples{
-a <- correl( iris[, 1], iris[, 2] )
+y <- rnorm(40)
+x <- matrix(rnorm(40 * 1000), ncol = 1000)
+a <- correls(y, x )
 }
 
 
