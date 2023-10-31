@@ -1,4 +1,4 @@
-eel.cor.test <- function(y, x, rho, tol = 1e-07) {
+eel.cor.test <- function (x, y, rho, tol = 1e-07) {
 
     funa <- function(zrho, zhro2, n) {
       lam1 <- 0
