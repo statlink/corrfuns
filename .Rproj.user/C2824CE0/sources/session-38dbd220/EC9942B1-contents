@@ -1,6 +1,6 @@
 el.cor.test <- function(y, x, rho, tol = 1e-07) {
 
-    funa <- function(zrho, tol) {
+    funa <- function(zrho, n) {
       lam1 <- 0
       f <- mean(zrho) - rho
       der <-  sum( zrho^2 / (1 + lam1 * zrho)^2 )
@@ -14,7 +14,7 @@ el.cor.test <- function(y, x, rho, tol = 1e-07) {
         der <-  sum( frac^2 )
         lam2 <- lam1 + f/der
       }
-      list(iters = i, lam2 = lam2, p = 1 / ( 1 + lam2 * zrho )  )
+      list(iters = i, lam2 = lam2, p = 1 / ( 1 + lam1 * zrho )  )
     }
 
     x <- ( x - mean(x) ) / Rfast::Var(x, std = TRUE)
@@ -23,17 +23,17 @@ el.cor.test <- function(y, x, rho, tol = 1e-07) {
     n <- length(z)
     zrho <- z - rho
 
-    res <- try( funa(zrho, tol), silent = TRUE )
+    res <- try( funa(zrho, n), silent = TRUE )
     if ( identical(class(res), "try-error") ) {
       p <- iters <- NULL
       info <- c(0, 10^5, 0)
     } else {
-      p <- res$p
+      p <- res$p/n
       stat <-  -2 * sum( log(p) )
       pvalue <- pchisq(stat, 1, lower.tail = FALSE)
       info <- c(res$lam2, stat, pvalue)
       iters <- res$iters
     }
     names(info) <- c("lambda", "statistic", "p-value")
-    list(iters = iters, info = info, p = p/n)
+    list(iters = iters, info = info, p = p)
 }

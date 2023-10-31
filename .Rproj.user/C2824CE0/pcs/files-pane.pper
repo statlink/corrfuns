@@ -6,8 +6,8 @@
         },
         {
             "columnIndex": 2,
-            "ascending": true
+            "ascending": false
         }
     ],
-    "path": "~/GitHub/corrfuns/R"
+    "path": "~/GitHub/corrfuns/man"
 }

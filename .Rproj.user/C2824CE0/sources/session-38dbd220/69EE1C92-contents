@@ -1,6 +1,6 @@
 eel.cor.test <- function(y, x, rho, tol = 1e-07) {
 
-    funa <- function(zrho, zhro2, n, tol) {
+    funa <- function(zrho, zhro2, n) {
       lam1 <- 0
       f <- mean(zrho) - rho
       der <- ( n * sum(zrho2) - sum(zrho)^2 ) / n^2
@@ -25,7 +25,7 @@ eel.cor.test <- function(y, x, rho, tol = 1e-07) {
     n <- length(z)
     zrho <- z - rho   ;   zrho2 <- zrho^2
 
-    res <- try( funa(zrho, zrho2, n, tol), silent = TRUE )
+    res <- try( funa(zrho, zrho2, n), silent = TRUE )
     if ( identical(class(res), "try-error") ) {
       p <- iters <- NULL
       info <- c(0, 10^5, 0)

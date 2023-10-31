@@ -81,7 +81,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{perm.elcortest}, \link{correl}, \link{permcor}
+\code{ \link{correl}, \link{permcor}
 }
 }
 

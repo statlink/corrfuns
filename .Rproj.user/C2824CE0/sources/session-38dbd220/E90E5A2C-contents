@@ -1,12 +1,12 @@
-\name{EL and EEL test for a correlation coefficient}
+\name{Empirical and exponential empirical likelihood test for a correlation coefficient}
 \alias{el.cor.test}
 \alias{eel.cor.test}
 \title{
-EL and EEL test for a correlation coefficient
+Empirical and exponential empirical likelihood test for a correlation coefficient
 }
 
 \description{
-EL and EEL test for a correlation coefficient.
+Empirical and exponential empirical likelihood test for a correlation coefficient.
 }
 
 \usage{
@@ -81,7 +81,7 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{perm.elcortest}, \link{correl}, \link{permcor}
+\code{ \link{correl}, \link{permcor}
 }
 }
 
