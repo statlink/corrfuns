@@ -13,7 +13,7 @@ eel.cor.test <- function(y, x, rho, tol = 1e-07) {
         up <- sum( zrho * com )
         down <- sum(com)
         f <- up / down - rho
-        der <- ( sum(zrho2 * com) * down - up^2 ) / down^2
+        der <-  sum(zrho2 * com) * down - up^2 ) / down^2
         lam2 <- lam1 - f / der
       }
       list(iters = i, lam2 = lam2, p = com / down )
