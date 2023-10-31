@@ -30,7 +30,7 @@ The tolerance vlaue to terminate the Newton-Raphson algorithm.
 }
 
 \details{
-
+The empirical or the exponential empirical likelihood test is performed for the correlation coefficient.
 }
 
 \value{
@@ -47,13 +47,10 @@ The probabilities of the EL or of the EEL.
 }
 
 \references{
-Efron B. and Tibshirani R.J. (1993). An introduction to the bootstrap. Chapman & Hall/CRC.
+Efron B. (1981) Nonparametric standard errors and confidence intervals. Canadian Journal of
+Statistics, 9(2): 139--158.
 
-Fieller E.C., Hartley H.O. and Pearson E.S. (1957). Tests for rank correlation coefficients.
-I. Biometrika, 44(3/4): 470--481.
-
-Fieller E.C. and Pearson E.S. (1961). Tests for rank correlation coefficients: II. Biometrika,
-48(1/2): 29--40.
+Owen A. B. (2001). Empirical likelihood. Chapman and Hall/CRC Press.
 }
 
 \author{
@@ -67,12 +64,13 @@ R implementation and documentation: Michail Tsagris \email{mtsagris@uoc.gr}.
 %}
 
 \seealso{
-\code{ \link{correls}, \link{permcorrels}
+\code{ \link{correl}, \link{permcor}
 }
 }
 
 \examples{
-a <- correl( iris[, 1], iris[, 2] )
+el.cor.test( iris[, 1], iris[, 2], 0 )$info
+eel.cor.test( iris[, 1], iris[, 2], 0 )$info
 }
 
 

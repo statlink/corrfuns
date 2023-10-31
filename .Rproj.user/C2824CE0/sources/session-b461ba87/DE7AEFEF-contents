@@ -36,15 +36,13 @@ The empirical or the exponential empirical likelihood test is performed for the 
 \value{
 A list including:
 \item{iters}{
-The number of iterations required by the Newton-Raphson. If no convergence occured this is NULL.
+The number of iterations required by the Newton-Raphson.
 }
 \item{info}{
 A vector with three values, the value of \eqn{\lambda}, the test statistic and its associated asymptotic p-value.
-If no convergence occured, the value of the \eqn{\lambda} is NA, the value of test statistic is \eqn{10^5}
-and the p-value is 0. No convergence can be interpreted as rejection of the hypothesis test.
 }
 \item{p}{
-The probabilities of the EL or of the EEL. If no covnergence occured this is NULL.
+The probabilities of the EL or of the EEL.
 }
 }
 
