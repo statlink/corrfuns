@@ -1,0 +1,26 @@
+{
+    "id": "E9F8F807",
+    "path": "~/GitHub/corrfuns/R/eel.cor.test.R",
+    "project_path": "R/eel.cor.test.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1698739210344.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "39,0",
+        "scrollLine": "25"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1698739490,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1698739490910,
+    "read_only": false,
+    "read_only_alternatives": []
+}
