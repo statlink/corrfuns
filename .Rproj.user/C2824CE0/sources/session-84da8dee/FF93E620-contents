@@ -9,8 +9,8 @@ permcor <- function(x, B = 999, fast = TRUE) {
     up <-  m1 * m2 / n
     test <- sum(x1 * x2) - up   ## test statistic
     R <- round( sqrt(B) )
-    xp <- Rfast::colShuffle( matrix(x1, nrow = n, ncol = R) )
-    yp <- Rfast::colShuffle( matrix(x2, nrow = n, ncol = R) )
+    xp <- Rfast::colShuffle( matrix(x, nrow = n, ncol = R) )
+    yp <- Rfast::colShuffle( matrix(y, nrow = n, ncol = R) )
     sxy <- crossprod(xp, yp)
     tb <- sxy - up ## the test statistic
     pvalue <- ( sum( abs(tb) > abs(test) ) + 1 ) / (R^2 + 1)  ## permutation p-value
